@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
-    class BinaryTree<T> where T : IComparable<T>
+    public class BinaryTree<T> where T : IComparable<T>
     {
           public T NodeData { get; set; }
         public BinaryTree<T> LeftTree { get; set; }   
@@ -57,6 +57,32 @@ namespace BinarySearchTree
         public void GetSize()
         {
             Console.WriteLine("Size" + " " + (1 + this.leftCount + this.rightCount));
-        } 
+        }
+        public bool IfExist(T element, BinaryTree<T> node)
+        {
+
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.NodeData.Equals(element))
+            {
+                Console.WriteLine("Found the element in BST" + " " + node.NodeData);
+                result = true;
+            }
+            else
+            {
+                Console.WriteLine("current element is {0} in BST", node.NodeData);
+            }
+            if (element.CompareTo(node.NodeData) < 0)
+            {
+                IfExist(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.NodeData) > 0)
+            {
+                IfExist(element, node.RightTree);
+            }
+            return result;
+        }
     }
 }
